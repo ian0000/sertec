@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta name="description" content="" />
+<meta name="author" content="" />
+<title>Vista Admin Lista Marcas - Usuarios Sermatec</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css"
+	rel="stylesheet" />
+<link href="../css/styles.css" rel="stylesheet" />
+<link href="../../css/styles.css" rel="stylesheet" />
+<script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js"
+	crossorigin="anonymous"></script>
+</head>
+<body class="sb-nav-fixed">
+	<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+		<!-- Navbar Brand-->
+		<a class="navbar-brand ps-3" href="adminView.html">Sermatec</a>
+		<!-- Navbar Search-->
+		<form
+			class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0"></form>
+		<!-- Navbar-->
+		<ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+			<li class="nav-item dropdown"><a
+				class="nav-link dropdown-toggle" id="navbarDropdown" href="#"
+				role="button" data-bs-toggle="dropdown" aria-expanded="false"><i
+					class="fas fa-user fa-fw"></i></a>
+				<ul class="dropdown-menu dropdown-menu-end"
+					aria-labelledby="navbarDropdown">
+					<li><a class="dropdown-item" href="#!">Settings</a></li>
+					<li><a class="dropdown-item" href="#!">Activity Log</a></li>
+					<li><hr class="dropdown-divider" /></li>
+					<li><a class="dropdown-item" href="index.html">Logout</a></li>
+				</ul></li>
+		</ul>
+	</nav>
+	<div id="layoutSidenav">
+		<div id="layoutSidenav_content">
+			<main>
+				<div class="float-right"></div>
+				<div class="card-header">
+					<i class="fas fa-table me-1"></i> Regresar página principal
+					<form></form>
+					<a class="btn btn-info" href="/admin"
+						role="button">Volver a la pagina principal</a>
+				</div>
+				<div class="card mb-4">
+					<div class="card-header">
+						<i class="fas fa-table me-1"></i> Agregar Marca
+						<form th:action="@{/brand/save}" th:object="${brandSave}"
+							method="post">
+							<div class="container ">
+								<div class="row w-25 mt-3 mx-auto">
+									<input class="col-s-2 " th:field="*{id}" type="text"
+										placeholder="ID" hidden> <input
+										class="col-xs-2 pb-3 mb-3" th:field="*{name}" type="text"
+										placeholder="Nombre Marca" required> <input
+										type="submit" value="guardar "
+										class="btn btn-primary col-xs-2" />
+								</div>
+							</div>
+						</form>
+
+					</div>
+					<div id="alerts">
+						<div
+							th:if="${(param.condition != null) and (param.condition[0] == 'saved')}"
+							class="alert alert-primary" role="alert">Se guardo
+							correctamente</div>
+						<div
+							th:if="${(param.condition != null) and (param.condition[0] == 'mod')}"
+							class="alert alert-primary" role="alert">Se modifico
+							correctamete</div>
+					</div>
+
+
+					<div class="card-body">
+						<i class="fas fa-table me-1"></i> Lista de Marcas
+						<table id="datatablesSimple">
+							<thead>
+								<tr>
+									<th>Código</th>
+									<th>Nombre</th>
+									<th>Estado</th>
+								</tr>
+							</thead>
+							<tfoot>
+								<tr>
+									<th>Código</th>
+									<th>Nombre</th>
+									<th>Estado</th>
+								</tr>
+							</tfoot>
+							<tbody>
+								<tr th:each="brand:${brands}">
+									<td th:text="${brand.id}"></td>
+									<td th:text="${brand.name}"></td>
+									<td th:text="${brand.state}"></td>
+									<td><a th:href="@{/brand/edit/}+${brand.id}"
+										class="btn btn-warning">Editar</a> <a
+										th:href="@{/brand/delete/}+${brand.id}" class="btn btn-danger">
+											<span th:if="${brand.state == NOT_ACTIVE}">Activar</span><span
+											th:ulsess="${brand.state == NOT_ACTIVE}">Desactivar</span>
+									</a></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+
+			</main>
+			<footer class="py-4 bg-light mt-auto">
+				<div class="container-fluid px-4">
+					<div
+						class="d-flex align-items-center justify-content-between small">
+						<div class="text-muted">Copyright &copy; Your Website 2022</div>
+						<div>
+							<a href="#">Privacy Policy</a> &middot; <a href="#">Terms
+								&amp; Conditions</a>
+						</div>
+					</div>
+				</div>
+			</footer>
+		</div>
+	</div>
+	<script type="text/javascript">
+		const element = document.getElementById("alerts");
+		setTimeout(del, 3000);
+		function del() {
+			element.remove();
+		}
+	</script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+		crossorigin="anonymous"></script>
+	<script src="../js/scripts.js"></script>
+	>
+	<script src="../../js/scripts.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"
+		crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest"
+		crossorigin="anonymous"></script>
+	<script src="../js/datatables-simple-demo.js"></script>
+	<script src="../../js/datatables-simple-demo.js"></script>
+
+</body>
+</html>

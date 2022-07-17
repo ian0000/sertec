@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:insert="fragments.html :: headerfiles">
+</head>
+<body class="sb-nav-fixed">
+<header th:insert="fragments.html :: navInt"></header>
+<div id="layoutSidenav">
+    <div id="layoutSidenav_content">
+        <main>
+            <div class="container-fluid px-4">
+                <h1 class="mt-4">Vista Admin</h1>
+
+                <div class="row">
+                    <div class="col-xl-3 col-md-6">
+                        <div class="card bg-primary text-white mb-4">
+                            <div class="card-body">Lista Usuarios</div>
+                            <div
+                                    class="card-footer d-flex align-items-center justify-content-between">
+                                <a class="small text-white stretched-link"
+                                   th:href="@{/usr}">Ver</a>
+                                <div class="small text-white">
+                                    <i class="fas fa-angle-right"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-6">
+                        <div class="card bg-secondary text-white mb-4">
+                            <div class="card-body">Lista Marcas</div>
+                            <div
+                                    class="card-footer d-flex align-items-center justify-content-between">
+                                <a class="small text-white stretched-link"
+                                   th:href="@{/brand}">Ver</a>
+                                <div class="small text-white">
+                                    <i class="fas fa-angle-right"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-6">
+                        <div class="card bg-info text-white mb-4">
+                            <div class="card-body">Lista Tipos
+                                Electrodomésticos
+                            </div>
+                            <div
+                                    class="card-footer d-flex align-items-center justify-content-between">
+                                <a class="small text-white stretched-link"
+                                   th:href="@{/elec}">Ver</a>
+                                <div class="small text-white">
+                                    <i class="fas fa-angle-right"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-3 col-md-6">
+                        <div class="card bg-success text-white mb-4">
+                            <div class="card-body">Crear Nueva OT</div>
+                            <div
+                                    class="card-footer d-flex align-items-center justify-content-between">
+                                <a class="small text-white stretched-link"
+                                   th:href="@{/admin/ver}">Nueva Orden de
+                                    Trabajo</a>
+                                <div class="small text-white">
+                                    <i class="fas fa-angle-right"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <i class="fas fa-table me-1"></i> Ordenes de trabajo
+                    </div>
+                    <div class="card-body">
+                        <table id="datatablesSimple" summary="tabla de ordenes">
+                            <thead>
+                            <tr>
+                                <th>Pos</th>
+                                <th>Número OT]</th>
+                                <th>CI</th>
+                                <th>Apellido</th>
+                                <th>#FAC</th>
+                                <th>Fecha Compra</th>
+                                <th>Modelo</th>
+                                <th>Serie</th>
+                                <th>Estado Garantia</th>
+                                <th>Fecha Ingreso</th>
+                                <th>Estado</th>
+                            </tr>
+                            </thead>
+                            <tfoot>
+                            <tr>
+                                <th>Name</th>
+                                <th>Position</th>
+                                <th>Office</th>
+                                <th>Age</th>
+                                <th>Start date</th>
+                                <th>Salary</th>
+                            </tr>
+                            </tfoot>
+                            <tbody>
+                            <tr th:each="ot,i:${ot}">
+                                <td th:text=${i.count}>
+                                <td th:text=${ot.id}>
+                                <td th:text=${ot.client.clientId}>
+                                <td th:text=${ot.client.lastName}>
+                                <td th:text=${ot.fac}>
+                                <td th:text="${#dates.format(ot.buyDate, 'dd-MMM-yyyy')}">
+                                <td th:text=${ot.model}>
+                                <td th:text=${ot.serialNumber}>
+                                <td th:text=${ot.warranty}>
+                                <td th:text="${#dates.format(ot.entryDate, 'dd-MMM-yyyy')}">
+                                <td th:text=${ot.state}>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <footer class="py-4 bg-light mt-auto">
+            <div class="container-fluid px-4">
+                <div
+                        class="d-flex align-items-center justify-content-between small">
+                    <div class="text-muted">Copyright &copy; Your Website 2022
+                    </div>
+                    <div>
+                        <a href="#">Privacy Policy</a> &middot; <a href="#">Terms
+                        &amp; Conditions</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+</div>
+<div th:insert="fragments.html :: scripts"></div>
+</body>
+</html>
